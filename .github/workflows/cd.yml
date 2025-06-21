@@ -28,4 +28,4 @@ jobs:
           echo "Starting new script in the background..."
           # nohup: 터미널 세션이 끊겨도 프로세스가 계속 실행되게 함
           # &: 프로세스를 백그라운드에서 실행
-          nohup python rfid_read_test.py &
+          nohup python3.12 rfid_read_test.py &
