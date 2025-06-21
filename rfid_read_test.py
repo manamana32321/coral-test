@@ -1,7 +1,7 @@
 import time
 from periphery import GPIO
 
-from mfrc522 import MFRC522  # RPi.GPIO 대신 periphery의 GPIO를 사용
+from mfrc522 import MFRC522
 
 # RST 핀 번호 설정 (BCM 핀 번호 기준, 코랄보드 22번핀 = GPIO 25)
 # 코랄보드 GPIO 번호는 `gpioinfo` 명령어로 확인 가능
