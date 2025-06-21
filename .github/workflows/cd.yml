@@ -16,8 +16,8 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          sudo python3 -m pip install --upgrade pip
-          sudo pip3 install -r requirements.txt
+          sudo python -m pip install --upgrade pip
+          sudo pip install -r requirements.txt
 
       - name: Run Application in Background
         run: |
@@ -29,4 +29,4 @@ jobs:
           echo "Starting new script in the background..."
           # nohup: 터미널 세션이 끊겨도 프로세스가 계속 실행되게 함
           # &: 프로세스를 백그라운드에서 실행
-          nohup python3 rfid_read_test.py &
+          nohup python rfid_read_test.py &
