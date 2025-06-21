@@ -8,6 +8,8 @@ from mfrc522 import MFRC522
 # RST 핀 번호 설정 (BCM 핀 번호 기준, 코랄보드 22번핀 = GPIO 25)
 # 코랄보드 GPIO 번호는 `gpioinfo` 명령어로 확인 가능
 RST_PIN_BCM = 25
+SPI_BUS = 0
+SPI_DEVICE = 0
 
 try:
     # GPIO 객체 생성 및 리셋 핀 초기화
@@ -16,7 +18,7 @@ try:
     print("GPIO 초기화 완료. RST 핀 제어 준비됨.")
 
     # MFRC522 객체 생성 (SPI 버스 0, 장치 0)
-    MIFAREReader = MFRC522(bus=0, device=0, rst_pin_mode=MFRC522.RST_PIN_NONE)
+    MIFAREReader = MFRC522(bus=SPI_BUS, device=SPI_DEVICE, pin_rst=-1)
     # rst_pin_mode를 NONE으로 설정하고 우리가 직접 제어
 
     print("RFID 리더가 준비되었습니다. 태그를 스캔해주세요...")
