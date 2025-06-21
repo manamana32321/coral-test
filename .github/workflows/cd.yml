@@ -16,7 +16,6 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          sudo python -m pip install --upgrade pip
           sudo pip install -r requirements.txt
 
       - name: Run Application in Background
