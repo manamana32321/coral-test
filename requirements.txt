@@ -2,4 +2,3 @@ requests
 smbus2
 RPLCD
 python-periphery
-mfrc522-python
