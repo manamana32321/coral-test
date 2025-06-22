@@ -4,7 +4,7 @@ from RPLCD.i2c import CharLCD
 
 # --- 설정 ---
 # 데이터시트의 GPIO_3, 즉 라인 번호 3을 사용하도록 변경
-PIR_GPIO_LINE = 3
+PIR_GPIO_LINE = 6
 GPIO_CHIP = "/dev/gpiochip0"
 
 # LCD 설정 (이전과 동일)
