@@ -1,0 +1,39 @@
+services:
+  # 1. 우리의 PIR 센서 애플리케이션 서비스
+  pir-app:
+    build: . # 현재 폴더의 Dockerfile을 사용해서 이미지를 빌드
+    container_name: pir_exporter
+    restart: unless-stopped
+    # 중요: 컨테이너가 호스트(코랄 보드)의 하드웨어 장치에 접근할 수 있게 함
+    privileged: true 
+    # 또는 더 안전한 방식:
+    # devices:
+    #   - "/dev/gpiomem:/dev/gpiomem"
+    #   - "/dev/gpiochip0:/dev/gpiochip0"
+
+  # 2. 프로메테우스 서비스
+  prometheus:
+    image: prom/prometheus:latest # arm64를 지원하는 공식 이미지
+    container_name: prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090" # PC에서 Prometheus 웹 UI에 접속하기 위한 포트
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus # 데이터 영속성을 위한 볼륨
+
+  # 3. 그라파나 서비스
+  grafana:
+    image: grafana/grafana-oss:latest # arm64를 지원하는 공식 이미지
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000" # PC에서 Grafana 웹 UI에 접속하기 위한 포트
+    volumes:
+      - grafana_data:/var/lib/grafana # 데이터 영속성을 위한 볼륨
+    depends_on:
+      - prometheus # Prometheus가 먼저 시작된 후에 실행
+
+volumes:
+  prometheus_data:
+  grafana_data:

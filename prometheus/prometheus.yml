@@ -1,0 +1,9 @@
+global:
+  scrape_interval: 15s # 15초마다 메트릭 수집
+
+scrape_configs:
+  - job_name: "pir-sensor"
+    static_configs:
+      # 'pir-app'은 docker-compose.yml에 정의된 우리 파이썬 앱의 서비스 이름
+      # 포트는 pir_exporter.py에서 설정한 8000번 포트
+      - targets: ["pir-app:8000"]

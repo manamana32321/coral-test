@@ -1,4 +1,2 @@
-requests
-smbus2
-RPLCD
-python-periphery
+prometheus_client
+periphery

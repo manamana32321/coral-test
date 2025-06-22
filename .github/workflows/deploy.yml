@@ -1,0 +1,40 @@
+name: Deploy Monitoring Stack with Docker Compose
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Build and Deploy on Coral
+    runs-on: [self-hosted, linux, arm64]
+
+    steps:
+      # 1. GitHub 저장소의 최신 코드를 runner로 내려받기
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Docker Compose로 애플리케이션 빌드 및 재시작
+      - name: Build and Deploy Services
+        run: |
+          docker-compose up -d --build
+
+      # 3. 불필요한 Docker 이미지 정리 (선택사항)
+      - name: Clean up old Docker images
+        run: |
+          docker image prune -af
+
+      # 4. pir-app 컨테이너 동작 여부 확인 (핵심!)
+      - name: Verify pir-app Container Status
+        run: |
+          echo "Verifying pir-app container is running..."
+          # docker-compose ps pir-app 결과에서 "Up" 문자열이 있는지 확인
+          # "Up"이 없으면 grep이 실패(종료 코드 1)하고, 워크플로우 전체가 실패 처리됨
+          docker-compose ps pir-app | grep "Up"
+
+      # 5. 실행 중인 모든 컨테이너 상태 로깅 (참고용)
+      - name: Display All Running Containers
+        run: |
+          echo "Current container status:"
+          docker-compose ps
