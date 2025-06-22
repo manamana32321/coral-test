@@ -18,7 +18,7 @@ jobs:
       # 2. Docker Compose로 애플리케이션 빌드 및 재시작
       - name: Build and Deploy Services
         run: |
-          docker-compose up -d --build
+          docker compose up -d --build
 
       # 3. 불필요한 Docker 이미지 정리 (선택사항)
       - name: Clean up old Docker images
@@ -29,12 +29,12 @@ jobs:
       - name: Verify pir-app Container Status
         run: |
           echo "Verifying pir-app container is running..."
-          # docker-compose ps pir-app 결과에서 "Up" 문자열이 있는지 확인
+          # docker compose ps pir-app 결과에서 "Up" 문자열이 있는지 확인
           # "Up"이 없으면 grep이 실패(종료 코드 1)하고, 워크플로우 전체가 실패 처리됨
-          docker-compose ps pir-app | grep "Up"
+          docker compose ps pir-app | grep "Up"
 
       # 5. 실행 중인 모든 컨테이너 상태 로깅 (참고용)
       - name: Display All Running Containers
         run: |
           echo "Current container status:"
-          docker-compose ps
+          docker compose ps
