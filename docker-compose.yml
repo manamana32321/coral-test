@@ -24,7 +24,7 @@ services:
 
   # 3. 그라파나 서비스
   grafana:
-    image: grafana/grafana-oss:latest # arm64를 지원하는 공식 이미지
+    image: grafana/grafana:latest # arm64를 지원하는 공식 이미지
     container_name: grafana
     restart: unless-stopped
     ports:
